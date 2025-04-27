@@ -7,7 +7,6 @@ async def zip_csv():
     try:
         df = pd.read_csv('database/flowers.csv', sep=',', encoding='utf-8')
         compression_opts = dict(method='zip', archive_name='flowers.csv')
-        # criar pasta zips se não existir
         if not os.path.exists('zips'):
             os.makedirs('zips')
 
