@@ -1,0 +1,6 @@
+src/*.log
+__pycache__
+venv
+exports
+zips
+xmls
