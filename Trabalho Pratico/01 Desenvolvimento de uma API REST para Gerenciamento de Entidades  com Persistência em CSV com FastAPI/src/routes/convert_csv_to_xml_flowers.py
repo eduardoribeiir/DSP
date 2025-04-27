@@ -6,15 +6,18 @@ from src.local_logger import local_logger
 async def convert_csv_to_xml_flowers():
     try:
         df = pd.read_csv('database/flowers.csv', sep=',', encoding='utf-8')
-        # criar pasta exports se não existir
+
         if not os.path.exists('xmls'):
             os.makedirs('xmls')
 
-        df.to_xml('xmls/flowers.xml', index=False, root_name='flowers', row_name='flower')
+        timestamp = pd.Timestamp.now().strftime('%Y%m%d%H%M%S')
+        fileName = f"flowers_{timestamp}.xml"
+
+        df.to_xml(f"xmls/{fileName}", index=False, root_name='flowers', row_name='flower')
 
         local_logger.info("Conversao de CSV para XML realizada com sucesso.")
 
-        return FileResponse('xmls/flowers.xml', media_type='application/xml', filename='flowers.xml')
+        return FileResponse(f"xmls/{fileName}", media_type='application/xml', filename=fileName)
     except Exception as e:
 
         local_logger.error(f"Erro ao converter csv para xml: {e}")

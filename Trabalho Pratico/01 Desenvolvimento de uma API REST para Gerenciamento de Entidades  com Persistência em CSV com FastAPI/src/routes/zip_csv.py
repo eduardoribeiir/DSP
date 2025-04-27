@@ -11,11 +11,15 @@ async def zip_csv():
         if not os.path.exists('zips'):
             os.makedirs('zips')
 
-        df.to_csv('zips/flowers.zip', compression=compression_opts)
+        timestamp = pd.Timestamp.now().strftime('%Y%m%d%H%M%S')
+
+        fileName = f"flowers_{timestamp}.zip"
+
+        df.to_csv(f"zips/{fileName}", compression=compression_opts)
 
         local_logger.info("Conversao de CSV para ZIP realizada com sucesso.")
 
-        return FileResponse('zips/flowers.zip', media_type='application/zip', filename='flowers.zip')
+        return FileResponse(f"zips/{fileName}", media_type='application/zip', filename=fileName)
     except Exception as e:
         local_logger.error(f"Erro ao converter csv para zip: {e}")
         return {"message": str(e)}
