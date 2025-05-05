@@ -4,6 +4,9 @@ from src.routes.index import index as index_route
 from src.routes.convert_csv_to_xml_flowers import convert_csv_to_xml_flowers
 from src.routes.get_sha_256 import get_sha_256
 from src.routes.zip_csv import zip_csv
+from src.routes.product.create import create_product
+from src.routes.product.delete import delete_product
+
 
 app = FastAPI()
 
@@ -22,3 +25,11 @@ async def zip_csv_route():
 @app.get("/hash/flowers")
 async def get_sha_256_route():
     return await get_sha_256('database/flowers.csv')
+
+@app.post("/product/create")
+async def create_product_route(name: str, price: float, quantity: int, due_date: str = None):
+    return await create_product(name, price, quantity, due_date)
+
+@app.delete("/product/delete")
+async def delete_product_route(id: int):
+    return await delete_product(id)

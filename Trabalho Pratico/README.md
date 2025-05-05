@@ -9,7 +9,7 @@ Executar:
 - pip install fastapi
 - pip install -U pip
 - pip install "uvicorn[standard]"
-- uvicord main:app --reload
+- uvicorn main:app --reload
 
 Rodar o servidor
 - source ./venv/bin/activate
