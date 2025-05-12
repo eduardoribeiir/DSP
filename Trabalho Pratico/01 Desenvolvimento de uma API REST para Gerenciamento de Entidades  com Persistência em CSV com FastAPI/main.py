@@ -8,6 +8,7 @@ from src.routes.product.create import create_product
 from src.routes.product.delete import delete_product
 from src.routes.product.read import read_product
 from src.routes.product.update import update_product
+from src.routes.product.count import count_products
 
 
 app = FastAPI()
@@ -33,6 +34,10 @@ async def read_product_route():
 @app.put("/product/update")
 async def update_product_route(id: int, name: str, price: float, quantity: int, due_date: str):
     return await update_product(id, name, price, quantity, due_date)
+
+@app.get("/product/count")
+async def count_product_route():
+    return await count_products()
 
 @app.get("/download/xml/products")
 async def download_xml_products_route():

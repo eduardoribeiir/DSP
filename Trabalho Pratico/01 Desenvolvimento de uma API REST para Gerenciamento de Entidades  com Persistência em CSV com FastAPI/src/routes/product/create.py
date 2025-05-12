@@ -1,5 +1,6 @@
 import csv
 from src.local_logger import local_logger
+from src.models.Product import Product
 
 async def create_product(name: str, price: float, quantity: int, due_date: str = None):
     try:
@@ -15,7 +16,8 @@ async def create_product(name: str, price: float, quantity: int, due_date: str =
         
         with open('database/produtos.csv', 'a', newline='') as arquivo_csv:
             writer_arquivo = csv.writer(arquivo_csv)
-            writer_arquivo.writerow([new_id, name, price, quantity, due_date])
+            product = Product(id=new_id, name=name, price=price, quantity=quantity, due_date=due_date)
+            writer_arquivo.writerow([product.id, product.name, product.price, product.quantity, product.due_date])
             arquivo_csv.close()
 
         local_logger.info(f"Produto {new_id} adicionado com sucesso.")

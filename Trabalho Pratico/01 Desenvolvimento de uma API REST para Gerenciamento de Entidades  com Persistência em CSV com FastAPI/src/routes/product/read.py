@@ -1,5 +1,6 @@
 import csv
 from src.local_logger import local_logger
+from src.models.Product import Product
 
 async def read_product():
     try:
@@ -17,13 +18,13 @@ async def read_product():
 
         products = []
         for row in rows:
-            product = {
-                "id": int(row[0]),
-                "nome": row[1],
-                "preco": float(row[2]),
-                "quantidade": int(row[3]),
-                "data_vencimento": row[4],
-            }
+            product = Product(
+                id=int(row[0]),
+                name=row[1],
+                price=float(row[2]),
+                quantity=int(row[3]),
+                due_date=row[4]
+            )
             products.append(product)
 
         local_logger.info("Produtos lidos com sucesso.")
