@@ -9,6 +9,7 @@ from src.routes.product.delete import delete_product
 from src.routes.product.read import read_product
 from src.routes.product.update import update_product
 from src.routes.product.count import count_products
+from src.routes.product.filter import filter_product_by_price, filter_product_by_due_date
 
 
 app = FastAPI()
@@ -38,6 +39,14 @@ async def update_product_route(id: int, name: str, price: float, quantity: int, 
 @app.get("/product/count")
 async def count_product_route():
     return await count_products()
+
+@app.get("/product/filter/price")
+async def filter_product_by_price_route(min_price: float, max_price: float):
+    return await filter_product_by_price(min_price, max_price)
+
+@app.get("/product/filter/due_date")
+async def filter_product_by_price_route(ini_due_date: str, final_due_date: str):
+    return await filter_product_by_due_date(ini_due_date, final_due_date)
 
 @app.get("/download/xml/products")
 async def download_xml_products_route():

@@ -8,7 +8,6 @@ async def update_product(id: int, name: str, price: float, quantity: int, due_da
         with open('database/produtos.csv', 'r') as arquivo_csv:
             reader_arquivo = csv.reader(arquivo_csv)
             next(reader_arquivo)
-            # rows = list(reader_arquivo)
             for row in reader_arquivo:
                 rows.append(Product(
                     id=int(row[0]),
@@ -30,8 +29,6 @@ async def update_product(id: int, name: str, price: float, quantity: int, due_da
 
             return {"message": "Produto não encontrado"}
 
-        # rows[array_index_to_update] = [id, name, price, quantity, due_date]
-        # rows[array_index_to_update] = Product(id=id, name=name, price=price, quantity=quantity, due_date=due_date)
         rows[array_index_to_update].name = name
         rows[array_index_to_update].price = price
         rows[array_index_to_update].quantity = quantity
